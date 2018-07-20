@@ -291,9 +291,9 @@ dependencies:
   - zip
   - zlib
 - name: php
-  version: 7.0.29
-  uri: https://buildpacks.cloudfoundry.org/dependencies/php7/php7-7.0.29-linux-x64-77a9f017.tgz
-  sha256: 77a9f0178c7256cd9bcead31f6680e1ad4714e6bac962652e354e2aeb68ade79
+  version: 7.0.30
+  uri: https://buildpacks.cloudfoundry.org/dependencies/php7/php7-7.0.30-linux-x64-a6ca69d9.tgz
+  sha256: a6ca69d9198e44904faafa1e4781b47c8180456ba8af45c2b8d95ac68b44ccb3
   cf_stacks:
   - cflinuxfs2
   modules:
@@ -359,11 +359,79 @@ dependencies:
   - zip
   - zlib
 - name: php
-  version: 7.0.30
-  uri: https://buildpacks.cloudfoundry.org/dependencies/php/php7-7.0.30-linux-x64-946cd86e.tgz
-  sha256: 946cd86eb22c4570f6ba7d8d8ff7f090c97ca3d4cbdadcf88494df31f3bbc1c1
+  version: 7.0.31
+  uri: https://buildpacks.cloudfoundry.org/dependencies/php/php7-7.0.31-linux-x64-cflinuxfs2-6e31f59c.tgz
+  sha256: 6e31f59c0e686cee2b73599cf43ec4ae617da59aa021564da337c481be96db51
   cf_stacks:
   - cflinuxfs2
+  modules:
+  - amqp
+  - apcu
+  - bz2
+  - cassandra
+  - curl
+  - dba
+  - exif
+  - fileinfo
+  - ftp
+  - gd
+  - geoip
+  - gettext
+  - gmp
+  - igbinary
+  - imagick
+  - imap
+  - ioncube
+  - ldap
+  - lua
+  - lzf
+  - mailparse
+  - mbstring
+  - mcrypt
+  - memcached
+  - mongodb
+  - msgpack
+  - mysqli
+  - oauth
+  - opcache
+  - openssl
+  - pcntl
+  - pdo
+  - pdo_mysql
+  - pdo_odbc
+  - pdo_pgsql
+  - pdo_sqlite
+  - pgsql
+  - phalcon
+  - phpiredis
+  - protobuf
+  - pspell
+  - rdkafka
+  - readline
+  - redis
+  - shmop
+  - snmp
+  - soap
+  - sockets
+  - solr
+  - stomp
+  - sysvmsg
+  - sysvsem
+  - sysvshm
+  - tideways
+  - tideways_xhprof
+  - xdebug
+  - xsl
+  - yaf
+  - yaml
+  - zip
+  - zlib
+- name: php
+  version: 7.0.31
+  uri: https://buildpacks.cloudfoundry.org/dependencies/php/php7-7.0.31-linux-x64-cflinuxfs3-8285ac39.tgz
+  sha256: 8285ac39c8325e13444ea5b9f770796994cbceb99a5329987889f5bdfd2890d6
+  cf_stacks:
+  - cflinuxfs3
   modules:
   - amqp
   - apcu
