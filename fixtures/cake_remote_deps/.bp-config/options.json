@@ -1,5 +1,0 @@
-{
-    "WEBDIR": "app/webroot",
-    "LIBDIR": "library",
-    "PHP_EXTENSIONS": ["pdo", "pdo_sqlite", "mcrypt"]
-}
