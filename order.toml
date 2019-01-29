@@ -1,0 +1,6 @@
+[[groups]]
+labels = ["php"]
+buildpacks = [
+  { id = "org.cloudfoundry.buildpacks.php", version = "latest" },
+  { id = "org.cloudfoundry.buildpacks.php-apps", version = "latest" }
+]

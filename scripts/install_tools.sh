@@ -3,10 +3,11 @@ set -euo pipefail
 
 cd "$( dirname "${BASH_SOURCE[0]}" )/.."
 source .envrc
+go mod download
 
 if [ ! -f .bin/ginkgo ]; then
-  go install github.com/onsi/ginkgo/ginkgo
+  go get -u github.com/onsi/ginkgo/ginkgo
 fi
-
-export BUNDLE_GEMFILE=cf.Gemfile
-bundle install
+if [ ! -f .bin/buildpack-packager ]; then
+  go install github.com/cloudfoundry/libbuildpack/packager/buildpack-packager
+fi

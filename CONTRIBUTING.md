@@ -10,7 +10,7 @@ If you are confident that you're covered under a Corporate CLA, please make sure
 
 ## Run the tests
 
-Use `./scripts/unit`, `./scripts/integration`, and `./scripts/brats`. The integration and brats tests require you to already be targeted at a cloudfoundry.
+See the [Cutlass](https://github.com/cloudfoundry/libbuildpack/tree/master/cutlass) CF buildpack test framework for more information.
 
 ## Pull Requests
 
