@@ -5,7 +5,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/Masterminds/semver v1.4.2
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/cloudfoundry/libbuildpack v0.0.0-20190204221830-290dcfc73c7d
+	github.com/cloudfoundry/libbuildpack v0.0.0
 	github.com/elazarl/goproxy v0.0.0-20181111060418-2ce16c963a8a
 	github.com/golang/mock v1.2.0
 	github.com/golang/protobuf v1.2.0
@@ -26,3 +26,5 @@ require (
 	gopkg.in/jarcoal/httpmock.v1 v1.0.0-20181117152235-275e9df93516
 	gopkg.in/yaml.v2 v2.2.2
 )
+
+replace github.com/cloudfoundry/libbuildpack => /Users/pivotal/workspace/libbuildpack
