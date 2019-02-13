@@ -19,15 +19,15 @@ var _ = Describe("V3 Wrapped CF PHP Buildpack", func() {
 
 	Context("When pushing a simple PHP script app", func() {
 		BeforeEach(func() {
-			app = cutlass.New(filepath.Join(bpDir, "fixtures", "simple_app"))
+			app = cutlass.New(filepath.Join(bpDir, "integration", "testdata", "simple_app"))
 			app.Disk = "1G"
-			app.Memory = "1G"
+			app.HealthCheck = "process"
 		})
 
 		It("uses the requested php version and runs successfully", func() {
 			Expect(app.Push()).To(Succeed())
 			Eventually(func() ([]string, error) { return app.InstanceStates() }, 120*time.Second).Should(Equal([]string{"RUNNING"}))
-			Eventually(app.Stdout.String).Should(MatchRegexp(`.*PHP.*\d+\.\d+\.\d+.*:.*Contributing.*`))
+			Eventually(app.Stdout.ANSIStrippedString).Should(MatchRegexp(`PHP \d+\.\d+\.\d+: Contributing`))
 			Eventually(app.Stdout.String).Should(ContainSubstring("OUT SUCCESS"))
 		})
 	})
@@ -47,10 +47,10 @@ var _ = Describe("V3 Wrapped CF PHP Buildpack", func() {
 			bpName = "unbuilt-v3-php"
 			bpZip := filepath.Join(tmpDir, bpName+".zip")
 
-			app = cutlass.New(filepath.Join(bpDir, "fixtures", "simple_app"))
+			app = cutlass.New(filepath.Join(bpDir, "integration", "testdata", "simple_app"))
 			app.Buildpacks = []string{bpName + "_buildpack"}
 			app.Disk = "1G"
-			app.Memory = "1G"
+			app.HealthCheck = "process"
 
 			cmd := exec.Command("git", "archive", "-o", bpZip, "HEAD")
 			cmd.Stdout = os.Stdout
@@ -69,8 +69,34 @@ var _ = Describe("V3 Wrapped CF PHP Buildpack", func() {
 			Expect(app.Push()).To(Succeed())
 			Eventually(func() ([]string, error) { return app.InstanceStates() }, 120*time.Second).Should(Equal([]string{"RUNNING"}))
 
-			Eventually(app.Stdout.String).Should(MatchRegexp(`.*PHP.*\d+\.\d+\.\d+.*:.*Contributing.*`))
+			Eventually(app.Stdout.ANSIStrippedString).Should(MatchRegexp(`PHP \d+\.\d+\.\d+: Contributing`))
 			Eventually(app.Stdout.String).Should(ContainSubstring("OUT SUCCESS"))
+		})
+	})
+
+	Context("multiple buildpacks with only v3 buildpacks", func() {
+		BeforeEach(func() {
+			if ok, err := cutlass.ApiGreaterThan("2.65.1"); err != nil || !ok {
+				Skip("API version does not have multi-buildpack support")
+			}
+
+			app = cutlass.New(filepath.Join(bpDir, "integration", "testdata", "v3_supplies_node"))
+			app.Stack = "cflinuxfs3"
+			app.Disk = "1G"
+			app.HealthCheck = "process"
+			app.Buildpacks = []string{
+				"https://github.com/cloudfoundry/nodejs-buildpack#v3",
+				"php_buildpack",
+			}
+		})
+
+		It("makes the supplied v3-shimmed dependency available at v3 launch and build", func() {
+			Expect(app.Push()).To(Succeed())
+
+			Eventually(app.Stdout.ANSIStrippedString).Should(MatchRegexp(`PHP \d+\.\d+\.\d+: Contributing`))
+			Eventually(app.Stdout.String).Should(ContainSubstring("OUT SUCCESS"))
+			Eventually(app.Stdout.ANSIStrippedString).Should(MatchRegexp(`NodeJS \d+\.\d+\.\d+: Contributing`))
+			Eventually(app.Stdout.String).Should(MatchRegexp(`Node version: v\d+\.\d+\.\d+`))
 		})
 	})
 })
