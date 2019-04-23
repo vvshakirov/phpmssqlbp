@@ -766,7 +766,7 @@ dependencies:
   - yaml
   - zip
   - zlib
-  - php_pdo_sqlsrv_72_ts
+  - pdo_sqlsrv_72_ts
   - sqlsrv_72_ts
 - name: php
   version: 7.3.3
