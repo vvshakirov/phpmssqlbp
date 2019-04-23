@@ -690,7 +690,7 @@ dependencies:
 - name: php
   version: 7.2.17
   uri: http://dev.quancy.com/assets/php7-7.2.17-linux-x64-cflinuxfs3.tgz
-  sha256: 5388ed1978b77de0997c5ac05e3e015a8b3eccc0daba5eed7b6d3662cdfbe693
+  sha256: 0324c90c74d8e9fc469fa32ea672cb808b481b9bc6aa57f18ade7fe0765f1e86
   cf_stacks:
   - cflinuxfs3
   source: https://php.net/distributions/php-7.2.17.tar.gz
